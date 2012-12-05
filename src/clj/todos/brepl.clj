@@ -1,4 +1,4 @@
-(ns todos.core
+(ns todos.brepl
   (:require [cemerick.piggieback :refer [cljs-repl]]
             [cljs.repl.browser :refer [repl-env]]
             cljs.repl))
