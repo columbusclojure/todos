@@ -1,8 +1,8 @@
 (ns todos.core
   (:require [crate.core :refer [html]]
-            [domina :refer [append! by-id by-class set_html! log]]
+            [domina :refer [append! by-id by-class set_html! log attrs value]]
             [domina.css :refer [sel]]
-            [domina.events :refer [listen!]])
+            [domina.events :refer [listen! prevent-default target]])
   (:use-macros [crate.def-macros :only [defpartial]]))
 
 (def id-seq (atom 0))
