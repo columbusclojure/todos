@@ -1,6 +1,6 @@
-(ns todos.core)
+(ns todos.core
+  (:require [cemerick.piggieback :refer [cljs-repl]]
+            [cljs.repl.browser :refer [repl-env]]
+            cljs.repl))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(cljs-repl :repl-env (doto (repl-env :port 9000) cljs.repl/-setup))

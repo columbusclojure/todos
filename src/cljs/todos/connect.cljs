@@ -1,8 +1,4 @@
 (ns todos.connect
-  (:require [clojure.browser.repl :as repl])
-
-  )
-
-(.log js/console "hello")
+  (:require [clojure.browser.repl :as repl]))
 
 (repl/connect "http://localhost:9000/repl")

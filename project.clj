@@ -6,8 +6,11 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.clojure/clojurescript "0.0-1535"]
                  [org.clojure/google-closure-library-third-party "0.0-2029"]
-                 [webfui "0.2.1"]]
+                 [com.cemerick/piggieback "0.0.2"]
+                 [crate "0.2.1"]
+                 [domina "1.0.1"]]
   :source-paths ["src/clj"]
+  :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
   :plugins [[lein-cljsbuild "0.2.9"]]
   :cljsbuild {
               :builds [{
