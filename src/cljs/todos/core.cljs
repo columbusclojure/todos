@@ -43,8 +43,7 @@
                                    (if (= id (:id task))
                                      (assoc task :state "done")
                                      task))
-                                 tasks)))])
-  )
+                                 tasks)))]))
 
 (defn update-tasks-dom [key reference old-state new-state]
   (render-tasks @tasks))
@@ -54,5 +53,4 @@
   (append! (by-id "content") (render-all @tasks))
   (listen! :submit add-task)
   (listen! :click  toggle-task)
-  (add-watch tasks :task-watcher update-tasks-dom)
-  )
+  (add-watch tasks :task-watcher update-tasks-dom))
