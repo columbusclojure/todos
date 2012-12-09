@@ -8,10 +8,13 @@
                  [org.clojure/google-closure-library-third-party "0.0-2029"]
                  [com.cemerick/piggieback "0.0.2"]
                  [crate "0.2.1"]
-                 [domina "1.0.1"]]
+                 [domina "1.0.1"]
+                 [compojure "1.1.3"]]
   :source-paths ["src/clj"]
   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-  :plugins [[lein-cljsbuild "0.2.9"]]
+  :plugins [[lein-cljsbuild "0.2.9"]
+            [lein-ring "0.7.5"]]
+  :ring {:handler todos.core/handler}
   :cljsbuild {
               :builds [{
                         :source-path "src/cljs"
