@@ -23,18 +23,18 @@ After compilation finishes, open the file resources/public/index.html in your br
 ## Hacking with the Brepl
 
 To use the browser repl you'll need a to run a webserver to serve up the static files.
-This is because the single-origin policy will prevent an html file opened from the filesystem
-from interacting with localhost:9000 (which is the port we'll be running the repl on)
 
-Here is a simple python server which you probably already have installed.
+This is because single-origin policy will prevent an html file opened from the filesystem from interacting with localhost:9000 (which is the port we'll be running the repl on)
+
+There is an http server included with the project that will serve up our index.html file. To start it simply run this command from the root of our project directory.
 
 ```bash
-cd resources/public
-python -m SimpleHTTPServer 8888
+lein ring server
 ```
+The clj code for the webserver is in src/clj/todos/core.clj
 
-Next you do ```lein cljsbuild repl-listen```. This starts your repl server. Now load the page
-http://localhost:8888/ and the browser will connect to your repl server.
+Next you do ```lein cljsbuild repl-listen```. This starts your repl server. Now load the page http://localhost:3000/index.html and the browser will connect to your repl server.
+
 The cljs code that causes this to happen is in src/cljs/todos/connect.cljs
 
 Now you can type something in the repl ```(js/alert "hello")```
