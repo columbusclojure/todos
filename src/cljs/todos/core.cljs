@@ -1,6 +1,6 @@
 (ns todos.core
   (:require [crate.core :refer [html]]
-            [domina :refer [append! by-id by-class set-html! log attrs value get-data]]
+            [domina :refer [append! by-id by-class set-html! log attrs value get-data set-value!]]
             [domina.css :refer [sel]]
             [domina.events :refer [listen! prevent-default target]])
   (:use-macros [crate.def-macros :only [defpartial]]))
@@ -36,8 +36,9 @@
 
 (defn add-task [ev]
   (prevent-default ev)
-  (swap! tasks conj (make-task (value (sel "input[name=description]")))))
-
+  (let [input (sel "input[name=description]")]
+    (swap! tasks conj (make-task (value input)))
+    (set-value! input "")))
 
 (defn toggle-task [ev]
   (prevent-default ev)
