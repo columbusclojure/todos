@@ -9,15 +9,18 @@
 
 (defn make-task
   ([description]
-     (make-task description "pending"))
-  ([description state]
-     {:id (swap! id-seq inc) :task description :state state}))
+     (make-task description false))
+  ([description done]
+     {:id (swap! id-seq inc) :task description :done done}))
 
-(def tasks (atom [(make-task "Learn ClojureScript" "done") (make-task "Profit")]))
+(def tasks (atom [(make-task "Learn ClojureScript" true) (make-task "Profit")]))
+
+(defn state-class [task]
+  (if (:done task) "done" "pending"))
 
 (defpartial task-html [task]
   [:li {:id (:id task)
-        :class (:state task)}
+        :class (state-class task)}
    [:a.task {:href "#" :data-task-id (:id task)} (:task task)]])
 
 (defn render-all [tasks]
@@ -35,15 +38,16 @@
   (prevent-default ev)
   (swap! tasks conj (make-task (value (sel "input[name=description]")))))
 
+
 (defn toggle-task [ev]
   (prevent-default ev)
-  (let [id (js/parseInt (:data-task-id (attrs (target ev))))
-        task (swap! tasks (fn [tasks]
-                            (map (fn [task]
-                                   (if (= id (:id task))
-                                     (assoc task :state "done")
-                                     task))
-                                 tasks)))]))
+  (let [id (js/parseInt (:data-task-id (attrs (target ev))))]
+    (swap! tasks (fn [tasks]
+                   (map (fn [task]
+                          (if (= id (:id task))
+                            (update-in task [:done] not)
+                            task))
+                        tasks)))))
 
 (defn update-tasks-dom [key reference old-state new-state]
   (render-tasks @tasks))
