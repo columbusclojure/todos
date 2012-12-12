@@ -1,6 +1,7 @@
 (ns todos.core
   (:require [crate.core :refer [html]]
-            [domina :refer [append! by-id by-class set-html! log attrs value get-data set-value!]]
+            [domina :refer [append! by-id by-class set-html! log attrs value get-data
+                            set-value! single-node]]
             [domina.css :refer [sel]]
             [domina.events :refer [listen! prevent-default target]])
   (:use-macros [crate.def-macros :only [defpartial]]))
@@ -58,4 +59,5 @@
   (append! (by-id "content") (render-all @tasks))
   (listen! :submit add-task)
   (listen! :click  toggle-task)
-  (add-watch tasks :task-watcher update-tasks-dom))
+  (add-watch tasks :task-watcher update-tasks-dom)
+  (.focus (single-node (sel "input"))))
